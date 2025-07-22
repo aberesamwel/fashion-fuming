@@ -1,5 +1,5 @@
 import React from 'react'
-import About from './Component/About/About'
+import About from './components/About/About.jsx'
 import Gallery from './components/Gallery.jsx';
 
 
