@@ -1,20 +1,23 @@
+// src/App.jsx
+import './App.css';
 import React from 'react';
-import Gallery from './components/Gallery.jsx';
+import Gallery from './components/Gallery';
 
-function App() {
+const App = () => {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow p-4 mb-6">
-        <h1 className="text-3xl font-bold text-center text-purple-600">Fashion Fuming Gallery</h1>
-      </header>
-      <main className="container mx-auto px-4">
+    <div className="min-h-screen bg-white">
+      <main className="p-4 max-w-7xl mx-auto">
         <Gallery />
       </main>
     </div>
   );
-}
+};
 
 export default App;
+
+
+
+
 
 
 
