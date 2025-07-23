@@ -1,84 +1,135 @@
+// src/components/Gallery.jsx
 import React, { useState, useEffect } from 'react';
+import Like from './Like';
+import Comment from './Comment';
+import Share from './Share';
+import Upload from './Upload';
+
+const API_KEY = 'dCGsKHuqgMf7JB0yEolUIJrFRb80ZEL4KoTMdgrilY1yx8K9ZMd2CQ4i';
+const SERVER_URL = 'http://localhost:3001';
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
+  const [uploadedImages, setUploadedImages] = useState([]);
   const [category, setCategory] = useState('fashion');
-  const [loading, setLoading] = useState(true);
 
-  const API_KEY = 'dCGsKHuqgMf7JB0yEolUIJrFRb80ZEL4KoTMdgrilY1yx8K9ZMd2CQ4i'; // Replace with your actual Pexels API key
-
+  // Fetch from Pexels
   useEffect(() => {
-    setLoading(true);
     fetch(`https://api.pexels.com/v1/search?query=${category}&per_page=12`, {
-      headers: {
-        Authorization: API_KEY
-      }
+      headers: { Authorization: API_KEY },
     })
-      .then(res => res.json())
-      .then(data => {
-        setImages(data.photos);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Error fetching fashion images:', error);
-        setLoading(false);
-      });
+      .then((res) => res.json())
+      .then((data) => setImages(data.photos))
+      .catch(console.error);
   }, [category]);
 
-  const handleLike = (id) => {
-    setImages(images.map(img => img.id === id ? { ...img, likes: (img.likes || 0) + 1 } : img));
+  // Fetch uploaded images
+  useEffect(() => {
+    fetch(`${SERVER_URL}/uploads`)
+      .then((res) => res.json())
+      .then(setUploadedImages)
+      .catch(console.error);
+  }, []);
+
+  // Upload handler
+  const handleUpload = (newImage) => {
+    const formatted = {
+      ...newImage,
+      uploaded: true,
+      category: category.toLowerCase(),
+      // Don’t set id manually — json-server will assign it
+      src: {
+        medium: newImage.src,      // preview URL passed from Upload.jsx
+        original: newImage.src,
+      },
+    };
+
+    fetch(`${SERVER_URL}/uploads`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formatted),
+    })
+      .then((res) => res.json())
+      .then((savedImage) =>
+        setUploadedImages((prev) => [...prev, savedImage])
+      )
+      .catch(console.error);
   };
 
-  return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Fashion Trends - {category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+  // ✅ Delete handler
+  const handleDelete = (id) => {
+    fetch(`${SERVER_URL}/uploads/${id}`, {
+      method: 'DELETE',
+    })
+      .then((res) => {
+        if (res.ok) {
+          setUploadedImages((prev) => prev.filter((img) => img.id !== id));
+        }
+      })
+      .catch(console.error);
+  };
 
-      <div className="mb-4">
-        <label className="mr-2">Category:</label>
-        <select
-          value={category}
-          onChange={e => setCategory(e.target.value)}
-          className="border rounded px-2 py-1"
-        >
-          <option value="fashion">Fashion</option>
-          <option value="streetwear">Streetwear</option>
-          <option value="runway">Runway</option>
-          <option value="vintage">Vintage</option>
-          <option value="style">Style</option>
-        </select>
+  const categoryImages = [
+    ...images,
+    ...uploadedImages.filter((img) => img.category === category),
+  ];
+
+  return (
+    <div className="container">
+      <h1 className="text-3xl font-bold mb-4">
+        Fashion-Fuming-Gallery: {category}
+      </h1>
+
+      <div className="category-select mb-4 flex gap-2">
+        {['Fashion', 'Vintage', 'Streetwear', 'Runway', 'Style'].map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setCategory(cat.toLowerCase())}
+            className={`px-4 py-1 rounded border ${
+              category === cat.toLowerCase()
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-black'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
 
-      {loading ? (
-        <p>Loading images...</p>
-      ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {images.map(image => (
-            <div key={image.id} className="border p-2 rounded shadow">
-              <img
-                src={image.src.medium}
-                alt={image.alt || 'Fashion image'}
-                className="w-full h-48 object-cover rounded"
-              />
-              <div className="mt-2 flex justify-between items-center">
-                <button
-                  onClick={() => handleLike(image.id)}
-                  className="text-sm text-blue-500 hover:underline"
-                >
-                  ❤️ {image.likes || 0} Like{(image.likes || 0) !== 1 ? 's' : ''}
-                </button>
-                <a
-                  href={image.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-green-500 hover:underline"
-                >
-                  View on Pexels
-                </a>
-              </div>
+      <Upload onUpload={handleUpload} category={category} />
+
+      <div className="image-grid grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+        {categoryImages.map((img) => (
+          <div
+            key={`${img.id}-${img.src?.medium}`}
+            className="image-card bg-white p-2 rounded shadow relative"
+          >
+            <img
+              src={img.src?.medium}
+              alt={img.alt || 'Fashion Image'}
+              className="w-full h-48 object-cover rounded"
+            />
+
+            {img.uploaded && (
+              <button
+                onClick={() => handleDelete(img.id)}
+                className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded text-xs"
+              >
+                Delete
+              </button>
+            )}
+
+            <div className="actions flex justify-between mt-2">
+              <Like imageId={img.id} />
+              <Share image={img.src?.original} />
             </div>
-          ))}
-        </div>
-      )}
+
+            <div className="comment-section mt-2">
+              <Comment imageId={img.id} />
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

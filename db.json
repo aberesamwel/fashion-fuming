@@ -1,34 +1,14 @@
 {
-  "images": [
+  "uploads": [],
+  "likes": [],
+  "comments": [
     {
-      "id": 1,
-      "url": "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg",
-      "category": "fashion",
-      "alt": "Model in red outfit",
-      "likes": 12,
-      "rating": 4,
-      "comments": ["Stunning!", "Love the color"]
-    },
-    {
-      "id": 2,
-      "url": "https://images.pexels.com/photos/1488463/pexels-photo-1488463.jpeg",
-      "category": "streetwear",
-      "alt": "Urban street style",
-      "likes": 8,
-      "rating": 5,
-      "comments": ["So cool", "Street vibes!"]
-    },
-    {
-      "id": 3,
-      "url": "https://images.pexels.com/photos/1704466/pexels-photo-1704466.jpeg",
-      "category": "vintage",
-      "alt": "Vintage dress outdoors",
-      "likes": 5,
-      "rating": 3,
-      "comments": ["Vintage queen"]
+      "id": "ca26",
+      "imageId": 1536619,
+      "text": "Wow",
+      "replies": [
+        "Not just a wow!"
+      ]
     }
   ]
 }
-
-
-
