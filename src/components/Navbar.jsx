@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className="flex items-center gap-4">
         <Link to="/home" className="hover:text-indigo-500">Home</Link>
         {user && !user.guest && (
-          <Link to="/dashboard" className="hover:text-indigo-500">Dashboard</Link>
+          <Link to="/gallery" className="hover:text-indigo-500"><Gallery /></Link>
         )}
 
         {/* ✅ Display Hello message */}
