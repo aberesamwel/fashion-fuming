@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <div className="bg-white dark:bg-gray-900 shadow-md p-4 flex justify-between items-center">
       
-      <div className="text-2xl font-bold text-indigo-500">MyApp</div>
+     <div className="text-2xl font-bold text-indigo-500">Fashion Fuming</div>
 
       
       <nav className="flex gap-6 text-lg text-gray-700 dark:text-gray-200 items-center">
