@@ -1,0 +1,318 @@
+
+.fashion-footer {
+  background-color: black;
+  color: #f5f5f5;
+  font-family: 'Montserrat', sans-serif;
+  padding: 0;
+  margin-top: 4rem;
+}
+
+/* Top Section */
+.footer-top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 3rem 5%;
+  border-bottom: 1px solid #333;
+}
+
+.brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.social-icons a:hover i {
+  color: inherit; /* Keeps original brand color on hover */
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.tagline {
+  font-size: 1rem;
+  color: #aaa;
+  font-weight: 400;
+  margin-top: -1rem;
+}
+
+/* Social Links */
+.social-links h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+
+.social-icons a {
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Individual brand colors */
+.social-icons a[href*="facebook.com"] i {
+  color: #1877f2; /* Facebook blue */
+}
+.social-icons a[href*="twitter.com"] i {
+  color: #1da1f2; /* Twitter blue */
+}
+.social-icons a[href*="instagram.com"] i {
+  color: #e1306c; /* Instagram pink */
+}
+.social-icons a[href*="pinterest.com"] i {
+  color: #e60023; /* Pinterest red */
+}
+.social-icons a[href*="youtube.com"] i {
+  color: #ff0000; /* YouTube red */
+}
+.social-icons a[href*="tiktok.com"] i {
+  color: #000000; /* TikTok black */
+}
+
+/* Hover effects */
+.social-icons a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+.social-icons a:hover i {
+  color: white; /* Optional: change to white on hover */
+}
+.social-icons a:hover {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* Footer Columns */
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.footer-col h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.footer-col h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 2px;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer-col a {
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.footer-col a:hover {
+  color: #fff;
+}
+
+/* Newsletter Form */
+.newsletter-form {
+  display: flex;
+  margin: 1.5rem 0;
+}
+
+.newsletter-form input {
+  flex: 1;
+  padding: 0.8rem;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.newsletter-form button {
+  background: #5d5a5e;
+  color: white;
+  border: none;
+  padding: 0 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  background: #7b1fa2;
+}
+
+/* App Download */
+.app-download {
+  margin-top: 1.5rem;
+}
+
+.app-download p {
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+  color: #aaa;
+}
+
+.app-buttons {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.app-buttons a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  transition: background 0.3s ease;
+}
+
+.app-buttons a:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Bottom Section */
+.footer-bottom {
+  padding: 2rem 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-legal p {
+  color: #777;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.legal-links {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.legal-links a {
+  color: #aaa;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.legal-links a:hover {
+  color: #fff;
+}
+
+.footer-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  align-items: center;
+}
+
+.cultural-badges {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.8rem;
+  color: #9c27b0;
+  font-weight: 600;
+}
+
+.payment-methods {
+  display: flex;
+  gap: 1rem;
+  color: #aaa;
+  font-size: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-top {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+  }
+  
+  .footer-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .footer-col:last-child {
+    grid-column: span 2;
+  }
+  
+  .legal-links {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-columns {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-col:last-child {
+    grid-column: span 1;
+  }
+  
+  .app-buttons {
+    flex-direction: column;
+  }
+}  
+/* Add this to your Footer.css */
+/* Social Icons */
+.fashion-footer .social-icons a[href*="facebook.com"] i {
+  color: #1877f2 !important;
+}
+
+.fashion-footer .social-icons a[href*="twitter.com"] i {
+  color: #1da1f2 !important;
+}
+
+.fashion-footer .social-icons a[href*="instagram.com"] i {
+  color: #e1306c !important;
+}
+
+.fashion-footer .social-icons a[href*="pinterest.com"] i {
+  color: #e60023 !important;
+}
+
+.fashion-footer .social-icons a[href*="youtube.com"] i {
+  color: #ff0000 !important;
+}
+
+.fashion-footer .social-icons a[href*="tiktok.com"] i {
+  color: #000000 !important;
+}
