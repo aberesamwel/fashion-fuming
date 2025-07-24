@@ -207,7 +207,7 @@ const Events = () => {
 
   return (
     <div className="events-container">
-      <h1>Fashion Fusion Events</h1>
+      <h1>Events</h1>
       
       
       <div className="event-filters">
