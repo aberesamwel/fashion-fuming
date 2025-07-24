@@ -1,4 +1,3 @@
-// src/components/Gallery.jsx
 import React, { useState, useEffect } from 'react';
 import Like from './Like';
 import Comment from './Comment';
@@ -9,11 +8,22 @@ const API_KEY = 'dCGsKHuqgMf7JB0yEolUIJrFRb80ZEL4KoTMdgrilY1yx8K9ZMd2CQ4i';
 const SERVER_URL = 'http://localhost:3001';
 
 const Gallery = () => {
+  // 🔐 Add real auth logic here or integrate with your teammate’s system
+  const isLoggedIn = true;
+
   const [images, setImages] = useState([]);
   const [uploadedImages, setUploadedImages] = useState([]);
   const [category, setCategory] = useState('fashion');
 
-  // Fetch from Pexels
+  // If not logged in, block access
+  if (!isLoggedIn) {
+    return (
+      <div className="text-center text-2xl font-bold text-gray-800 dark:text-white">
+        Gallery (Only for Logged-in Users)
+      </div>
+    );
+  }
+
   useEffect(() => {
     fetch(`https://api.pexels.com/v1/search?query=${category}&per_page=12`, {
       headers: { Authorization: API_KEY },
@@ -23,7 +33,6 @@ const Gallery = () => {
       .catch(console.error);
   }, [category]);
 
-  // Fetch uploaded images
   useEffect(() => {
     fetch(`${SERVER_URL}/uploads`)
       .then((res) => res.json())
@@ -31,15 +40,13 @@ const Gallery = () => {
       .catch(console.error);
   }, []);
 
-  // Upload handler
   const handleUpload = (newImage) => {
     const formatted = {
       ...newImage,
       uploaded: true,
       category: category.toLowerCase(),
-      // Don’t set id manually — json-server will assign it
       src: {
-        medium: newImage.src,      // preview URL passed from Upload.jsx
+        medium: newImage.src,
         original: newImage.src,
       },
     };
@@ -50,13 +57,10 @@ const Gallery = () => {
       body: JSON.stringify(formatted),
     })
       .then((res) => res.json())
-      .then((savedImage) =>
-        setUploadedImages((prev) => [...prev, savedImage])
-      )
+      .then((savedImage) => setUploadedImages((prev) => [...prev, savedImage]))
       .catch(console.error);
   };
 
-  // ✅ Delete handler
   const handleDelete = (id) => {
     fetch(`${SERVER_URL}/uploads/${id}`, {
       method: 'DELETE',

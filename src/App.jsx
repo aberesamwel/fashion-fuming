@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -15,14 +15,14 @@ import Footer from "./components/Footer";
 
 import "./App.css";
 
-// Protected route wrapper
+// ✅ Protected route wrapper (you can move this to its own file if reused)
 const ProtectedRoute = ({ children }) => {
-  const { user } = useContext(AuthContext);
+  const { user } = React.useContext(AuthContext);
   if (!user || user.guest) return <Navigate to="/" />;
   return children;
 };
 
-function App() {
+const App = () => {
   return (
     <ThemeProvider>
       <AuthProvider>
@@ -40,6 +40,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<AuthPage />} />
                 <Route path="/home" element={<Home />} />
+                <Route path="/events" element={<Events />} />
                 <Route
                   path="/dashboard"
                   element={
@@ -48,11 +49,16 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-                <Route path="/events" element={<Events />} />
+                <Route
+                  path="/gallery"
+                  element={
+                    <ProtectedRoute>
+                      <Gallery />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="/about" element={<About />} />
               </Routes>
-
-              <Gallery />
-              <About />
             </main>
 
             <Footer />
@@ -61,6 +67,6 @@ function App() {
       </AuthProvider>
     </ThemeProvider>
   );
-}
+};
 
 export default App;
