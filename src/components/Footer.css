@@ -7,7 +7,7 @@
   margin-top: 4rem;
 }
 
-/* Top Section */
+
 .footer-top {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -21,9 +21,7 @@
   flex-direction: column;
   gap: 1.5rem;
 }
-.social-icons a:hover i {
-  color: inherit; /* Keeps original brand color on hover */
-}
+
 
 .logo {
   font-size: 1.8rem;
@@ -40,7 +38,7 @@
   margin-top: -1rem;
 }
 
-/* Social Links */
+
 .social-links h3 {
   font-size: 1.1rem;
   margin-bottom: 1rem;
@@ -51,10 +49,8 @@
   display: flex;
   gap: 1rem;
 }
-
-
 .social-icons a {
-  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+  background:white;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -64,41 +60,39 @@
   transition: all 0.3s ease;
 }
 
-/* Individual brand colors */
-.social-icons a[href*="facebook.com"] i {
-  color: #1877f2; /* Facebook blue */
+
+.social-icons a  {
+  color: inherit; 
+}
+
+
+
+.social-icons a[href*="facebook.com"]  {
+  color: #1877f2;
 }
 .social-icons a[href*="twitter.com"] i {
-  color: #1da1f2; /* Twitter blue */
+  color: #1da1f2; 
 }
-.social-icons a[href*="instagram.com"] i {
-  color: #e1306c; /* Instagram pink */
+.social-icons a[href*="instagram.com"] i  {
+  color: #e1306c; 
 }
 .social-icons a[href*="pinterest.com"] i {
-  color: #e60023; /* Pinterest red */
+  color: #e60023; 
 }
 .social-icons a[href*="youtube.com"] i {
-  color: #ff0000; /* YouTube red */
+  color: #ff0000; 
 }
 .social-icons a[href*="tiktok.com"] i {
-  color: #000000; /* TikTok black */
+  color: #000000; 
 }
-
-/* Hover effects */
 .social-icons a:hover {
-  background: rgba(255, 255, 255, 0.2);
+  color: inherit; 
+    background: rgba(255, 255, 255, 0.3);
   transform: scale(1.1);
 }
-.social-icons a:hover i {
-  color: white; /* Optional: change to white on hover */
-}
-.social-icons a:hover {
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-  transform: translateY(-3px);
-}
 
-/* Footer Columns */
+
+
 .footer-columns {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -141,7 +135,7 @@
   color: #fff;
 }
 
-/* Newsletter Form */
+
 .newsletter-form {
   display: flex;
   margin: 1.5rem 0;
@@ -169,7 +163,7 @@
   background: #7b1fa2;
 }
 
-/* App Download */
+
 .app-download {
   margin-top: 1.5rem;
 }
@@ -201,7 +195,7 @@
   background: rgba(255,255,255,0.2);
 }
 
-/* Bottom Section */
+
 .footer-bottom {
   padding: 2rem 5%;
   display: flex;
@@ -235,28 +229,6 @@
   color: #fff;
 }
 
-.footer-badges {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  width: 100%;
-  align-items: center;
-}
-
-.cultural-badges {
-  display: flex;
-  gap: 1.5rem;
-  font-size: 0.8rem;
-  color: #9c27b0;
-  font-weight: 600;
-}
-
-.payment-methods {
-  display: flex;
-  gap: 1rem;
-  color: #aaa;
-  font-size: 1.5rem;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -291,28 +263,3 @@
     flex-direction: column;
   }
 }  
-/* Add this to your Footer.css */
-/* Social Icons */
-.fashion-footer .social-icons a[href*="facebook.com"] i {
-  color: #1877f2 !important;
-}
-
-.fashion-footer .social-icons a[href*="twitter.com"] i {
-  color: #1da1f2 !important;
-}
-
-.fashion-footer .social-icons a[href*="instagram.com"] i {
-  color: #e1306c !important;
-}
-
-.fashion-footer .social-icons a[href*="pinterest.com"] i {
-  color: #e60023 !important;
-}
-
-.fashion-footer .social-icons a[href*="youtube.com"] i {
-  color: #ff0000 !important;
-}
-
-.fashion-footer .social-icons a[href*="tiktok.com"] i {
-  color: #000000 !important;
-}
