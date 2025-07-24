@@ -10,8 +10,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { AuthProvider, AuthContext } from "./contexts/AuthContext";
 
 import Navbar from "./components/Navbar";
-import Home from "./components/home";
-import About from "./components/About/About";
+import Home from "./components/Home";
+import About from "./components/About";
 import Gallery from "./components/Gallery";
 import Events from "./components/Events";
 import Footer from "./components/Footer";
@@ -30,28 +30,25 @@ const App = () => {
     <ThemeProvider>
       <AuthProvider>
         <Router>
-          <div className="App min-h-screen bg-gray-100">
+          <div className="App min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
             <Navbar />
 
-            <header className="bg-white shadow p-4 mb-6">
-              <h1 className="text-3xl font-bold text-center text-purple-600">
+            <header className="bg-white dark:bg-gray-800 shadow p-4 mb-6">
+              <h1 className="text-3xl font-bold text-center text-purple-600 dark:text-purple-300">
                 Fashion Fuming Gallery
               </h1>
             </header>
 
             <main className="container mx-auto px-4">
               <Routes>
-                {/* ✅ Redirect root to /home */}
+                {/* Redirect root to /home */}
                 <Route path="/" element={<Navigate to="/home" replace />} />
 
                 <Route path="/home" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/events" element={<Events />} />
 
-                {/* ✅ Optional: route to handle /event if it exists */}
-                {/* <Route path="/event" element={<EventDetail />} /> */}
-
-                {/* ✅ Protected Gallery route */}
+                {/* Protected gallery route */}
                 <Route
                   path="/gallery"
                   element={
@@ -61,8 +58,8 @@ const App = () => {
                   }
                 />
 
-                {/* ✅ Catch-all for unmatched routes */}
-                <Route path="*" element={<div>404 Not Found</div>} />
+                {/* Catch-all route */}
+                <Route path="*" element={<div>404 - Page Not Found</div>} />
               </Routes>
             </main>
 

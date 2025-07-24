@@ -20,14 +20,17 @@ const Navbar = () => {
 
   return (
     <div className="bg-white dark:bg-gray-900 shadow-md p-4 flex justify-between items-center">
-      <div className="text-2xl font-bold text-indigo-500">MyApp</div>
+      {/* Logo */}
+      <div className="text-2xl font-bold text-indigo-500">Fashion Fuming</div>
 
+      {/* Navigation */}
       <nav className="flex gap-6 text-lg text-gray-700 dark:text-gray-200 items-center">
         <Link to="/home" className="hover:text-indigo-500">Home</Link>
         <Link to="/about" className="hover:text-indigo-500">About</Link>
-        <Link to="/events" className="hover:text-indigo-500">Events</Link>
         <Link to="/gallery" className="hover:text-indigo-500">Gallery</Link>
+        <Link to="/events" className="hover:text-indigo-500">Events</Link>
 
+        {/* Dark Mode Toggle */}
         <button
           onClick={() => setDarkMode(!darkMode)}
           className="px-3 py-1 bg-indigo-500 text-white rounded hover:bg-indigo-600"
@@ -35,6 +38,7 @@ const Navbar = () => {
           {darkMode ? "Light" : "Dark"}
         </button>
 
+        {/* Auth Links */}
         {!user ? (
           <button
             onClick={() => setShowModal(true)}
@@ -57,6 +61,7 @@ const Navbar = () => {
         )}
       </nav>
 
+      {/* Login / Signup Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl w-96">

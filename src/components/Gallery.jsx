@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../contexts/AuthContext'; // Adjust path if needed
+import { AuthContext } from '../contexts/AuthContext';
 
 import Like from './Like';
 import Comment from './Comment';
@@ -17,7 +17,7 @@ const Gallery = () => {
   const [uploadedImages, setUploadedImages] = useState([]);
   const [category, setCategory] = useState('fashion');
 
-  // 🔒 Block access if not logged in
+  // 🔒 Restrict access to logged-in users
   if (!isLoggedIn) {
     return (
       <div className="text-center text-2xl font-bold text-gray-800 dark:text-white">
@@ -26,7 +26,7 @@ const Gallery = () => {
     );
   }
 
-  // 🌐 Fetch images from Pexels
+  // 🌐 Fetch images from Pexels based on category
   useEffect(() => {
     fetch(`https://api.pexels.com/v1/search?query=${category}&per_page=12`, {
       headers: { Authorization: API_KEY },
@@ -39,7 +39,7 @@ const Gallery = () => {
       });
   }, [category]);
 
-  // 🗂️ Fetch previously uploaded images
+  // 🗂️ Fetch uploaded images from your backend
   useEffect(() => {
     fetch(`${SERVER_URL}/uploads`)
       .then((res) => res.json())
@@ -50,10 +50,10 @@ const Gallery = () => {
       });
   }, []);
 
-  // 📤 Handle new image upload
+  // 📤 Handle uploading new images
   const handleUpload = (newImage) => {
     const formatted = {
-      id: Date.now(), // local unique ID for now; ideally from server
+      id: Date.now(), // temporary ID
       ...newImage,
       uploaded: true,
       category: category.toLowerCase(),
@@ -76,7 +76,7 @@ const Gallery = () => {
       });
   };
 
-  // ❌ Handle delete
+  // ❌ Delete uploaded image
   const handleDelete = (id) => {
     fetch(`${SERVER_URL}/uploads/${id}`, {
       method: 'DELETE',
@@ -94,26 +94,27 @@ const Gallery = () => {
       });
   };
 
+  // Combine fetched and uploaded images by category
   const categoryImages = [
     ...images,
     ...uploadedImages.filter((img) => img.category === category),
   ];
 
   return (
-    <div className="container">
-      <h1 className="text-3xl font-bold mb-4">
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-4 text-center text-gray-800 dark:text-white">
         Fashion-Fuming-Gallery: {category}
       </h1>
 
-      <div className="category-select mb-4 flex gap-2">
+      <div className="category-select mb-6 flex flex-wrap gap-2 justify-center">
         {['Fashion', 'Vintage', 'Streetwear', 'Runway', 'Style'].map((cat) => (
           <button
             key={cat}
             onClick={() => setCategory(cat.toLowerCase())}
-            className={`px-4 py-1 rounded border ${
+            className={`px-4 py-2 rounded border font-semibold ${
               category === cat.toLowerCase()
                 ? 'bg-blue-600 text-white'
-                : 'bg-white text-black'
+                : 'bg-white text-black border-gray-300'
             }`}
           >
             {cat}
@@ -123,11 +124,11 @@ const Gallery = () => {
 
       <Upload onUpload={handleUpload} category={category} />
 
-      <div className="image-grid grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+      <div className="image-grid grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
         {categoryImages.map((img) => (
           <div
-            key={`${img.id || img.src?.medium || Math.random()}`}
-            className="image-card bg-white p-2 rounded shadow relative"
+            key={img.id || img.src?.medium || Math.random()}
+            className="image-card bg-white dark:bg-gray-800 p-3 rounded shadow relative"
           >
             <img
               src={img.src?.medium}
