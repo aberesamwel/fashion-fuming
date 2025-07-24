@@ -77,7 +77,7 @@ const Gallery = () => {
   return (
     <div className="container">
       <h1 className="text-3xl font-bold mb-4">
-        Fashion-Fuming-Gallery: {category}
+        Gallery: {category}
       </h1>
 
       <div className="category-select mb-4 flex gap-2">
