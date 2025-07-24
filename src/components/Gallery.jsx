@@ -17,7 +17,6 @@ const Gallery = () => {
   const [uploadedImages, setUploadedImages] = useState([]);
   const [category, setCategory] = useState('fashion');
 
-  // 🔒 Restrict access to logged-in users
   if (!isLoggedIn) {
     return (
       <div className="text-center text-2xl font-bold text-gray-800 dark:text-white">
@@ -26,7 +25,6 @@ const Gallery = () => {
     );
   }
 
-  // 🌐 Fetch images from Pexels based on category
   useEffect(() => {
     fetch(`https://api.pexels.com/v1/search?query=${category}&per_page=12`, {
       headers: { Authorization: API_KEY },
@@ -39,7 +37,6 @@ const Gallery = () => {
       });
   }, [category]);
 
-  // 🗂️ Fetch uploaded images from your backend
   useEffect(() => {
     fetch(`${SERVER_URL}/uploads`)
       .then((res) => res.json())
@@ -50,10 +47,9 @@ const Gallery = () => {
       });
   }, []);
 
-  // 📤 Handle uploading new images
   const handleUpload = (newImage) => {
     const formatted = {
-      id: Date.now(), // temporary ID
+      id: Date.now(),
       ...newImage,
       uploaded: true,
       category: category.toLowerCase(),
@@ -76,7 +72,6 @@ const Gallery = () => {
       });
   };
 
-  // ❌ Delete uploaded image
   const handleDelete = (id) => {
     fetch(`${SERVER_URL}/uploads/${id}`, {
       method: 'DELETE',
@@ -94,7 +89,6 @@ const Gallery = () => {
       });
   };
 
-  // Combine fetched and uploaded images by category
   const categoryImages = [
     ...images,
     ...uploadedImages.filter((img) => img.category === category),

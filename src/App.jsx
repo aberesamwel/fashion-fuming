@@ -11,7 +11,7 @@ import { AuthProvider, AuthContext } from "./contexts/AuthContext";
 
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-import About from "./components/About";
+import About from "./components/About/About";
 import Gallery from "./components/Gallery";
 import Events from "./components/Events";
 import Footer from "./components/Footer";
