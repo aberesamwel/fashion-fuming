@@ -1,40 +1,35 @@
-import React, { useContext } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import { AuthProvider, AuthContext } from "./contexts/AuthContext";
-import AuthPage from "./components/AuthPage";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import AuthPage from "./components/AuthPage";
 import Home from "./components/home";
-import Dashboard from "./components/Dashboard";
+import Gallery from "./components/Gallery";
+import { AuthProvider } from "./contexts/AuthContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
-const ProtectedRoute = ({ children }) => {
-  const { user } = useContext(AuthContext);
-  if (!user || user.guest) return <Navigate to="/" />;
-  return children;
-};
-
-function App() {
+const App = () => {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <BrowserRouter>
+        <Router>
           <Navbar />
           <Routes>
             <Route path="/" element={<AuthPage />} />
             <Route path="/home" element={<Home />} />
             <Route
-              path="/dashboard"
+              path="/gallery"
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <Gallery />
                 </ProtectedRoute>
               }
             />
           </Routes>
-        </BrowserRouter>
+        </Router>
       </AuthProvider>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

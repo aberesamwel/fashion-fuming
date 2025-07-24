@@ -14,17 +14,17 @@ const AuthPage = () => {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
-      {/* LEFT SIDE: Home Info */}
+      
       <div className="flex-1 flex items-center justify-center bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 text-white p-8">
         <div className="text-center max-w-md">
-          <h1 className="text-4xl font-bold mb-4">Welcome to MyApp</h1>
+          <h1 className="text-4xl font-bold mb-4">Welcome to <span className="text-yellow-300">Fashion Fuming</span></h1>
           <p className="text-lg">
             Enjoy our platform! Sign up to unlock full features or continue as a guest.
           </p>
         </div>
       </div>
 
-      {/* RIGHT SIDE: Auth Form */}
+      
       <div className="flex-1 flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-8">
         <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl w-80">
           <h2 className="text-3xl font-extrabold text-center mb-6 text-gray-800 dark:text-white">
