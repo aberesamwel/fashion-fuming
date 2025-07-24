@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext'; // Adjust path if needed
+
 import Like from './Like';
 import Comment from './Comment';
 import Share from './Share';
@@ -8,40 +10,50 @@ const API_KEY = 'dCGsKHuqgMf7JB0yEolUIJrFRb80ZEL4KoTMdgrilY1yx8K9ZMd2CQ4i';
 const SERVER_URL = 'http://localhost:3001';
 
 const Gallery = () => {
-  // 🔐 Add real auth logic here or integrate with your teammate’s system
-  const isLoggedIn = true;
+  const { user } = useContext(AuthContext);
+  const isLoggedIn = user && !user.guest;
 
   const [images, setImages] = useState([]);
   const [uploadedImages, setUploadedImages] = useState([]);
   const [category, setCategory] = useState('fashion');
 
-  // If not logged in, block access
+  // 🔒 Block access if not logged in
   if (!isLoggedIn) {
     return (
       <div className="text-center text-2xl font-bold text-gray-800 dark:text-white">
-        Gallery (Only for Logged-in Users)
+        Gallery access is restricted to authenticated users.
       </div>
     );
   }
 
+  // 🌐 Fetch images from Pexels
   useEffect(() => {
     fetch(`https://api.pexels.com/v1/search?query=${category}&per_page=12`, {
       headers: { Authorization: API_KEY },
     })
       .then((res) => res.json())
       .then((data) => setImages(data.photos))
-      .catch(console.error);
+      .catch((err) => {
+        console.error('Failed to fetch Pexels images:', err);
+        alert('Failed to load images from Pexels.');
+      });
   }, [category]);
 
+  // 🗂️ Fetch previously uploaded images
   useEffect(() => {
     fetch(`${SERVER_URL}/uploads`)
       .then((res) => res.json())
       .then(setUploadedImages)
-      .catch(console.error);
+      .catch((err) => {
+        console.error('Failed to fetch uploaded images:', err);
+        alert('Could not load uploaded images.');
+      });
   }, []);
 
+  // 📤 Handle new image upload
   const handleUpload = (newImage) => {
     const formatted = {
+      id: Date.now(), // local unique ID for now; ideally from server
       ...newImage,
       uploaded: true,
       category: category.toLowerCase(),
@@ -58,9 +70,13 @@ const Gallery = () => {
     })
       .then((res) => res.json())
       .then((savedImage) => setUploadedImages((prev) => [...prev, savedImage]))
-      .catch(console.error);
+      .catch((err) => {
+        console.error('Upload failed:', err);
+        alert('Upload failed. Please try again.');
+      });
   };
 
+  // ❌ Handle delete
   const handleDelete = (id) => {
     fetch(`${SERVER_URL}/uploads/${id}`, {
       method: 'DELETE',
@@ -68,9 +84,14 @@ const Gallery = () => {
       .then((res) => {
         if (res.ok) {
           setUploadedImages((prev) => prev.filter((img) => img.id !== id));
+        } else {
+          throw new Error('Delete failed');
         }
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error('Failed to delete image:', err);
+        alert('Failed to delete image.');
+      });
   };
 
   const categoryImages = [
@@ -105,7 +126,7 @@ const Gallery = () => {
       <div className="image-grid grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
         {categoryImages.map((img) => (
           <div
-            key={`${img.id}-${img.src?.medium}`}
+            key={`${img.id || img.src?.medium || Math.random()}`}
             className="image-card bg-white p-2 rounded shadow relative"
           >
             <img

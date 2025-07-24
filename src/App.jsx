@@ -1,13 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { AuthProvider, AuthContext } from "./contexts/AuthContext";
 
-import AuthPage from "./components/AuthPage";
 import Navbar from "./components/Navbar";
 import Home from "./components/home";
-import Dashboard from "./components/Dashboard";
 import About from "./components/About/About";
 import Gallery from "./components/Gallery";
 import Events from "./components/Events";
@@ -15,7 +18,7 @@ import Footer from "./components/Footer";
 
 import "./App.css";
 
-// ✅ Protected route wrapper (you can move this to its own file if reused)
+// ✅ Protected route wrapper
 const ProtectedRoute = ({ children }) => {
   const { user } = React.useContext(AuthContext);
   if (!user || user.guest) return <Navigate to="/" />;
@@ -38,17 +41,17 @@ const App = () => {
 
             <main className="container mx-auto px-4">
               <Routes>
-                <Route path="/" element={<AuthPage />} />
+                {/* ✅ Redirect root to /home */}
+                <Route path="/" element={<Navigate to="/home" replace />} />
+
                 <Route path="/home" element={<Home />} />
+                <Route path="/about" element={<About />} />
                 <Route path="/events" element={<Events />} />
-                <Route
-                  path="/dashboard"
-                  element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  }
-                />
+
+                {/* ✅ Optional: route to handle /event if it exists */}
+                {/* <Route path="/event" element={<EventDetail />} /> */}
+
+                {/* ✅ Protected Gallery route */}
                 <Route
                   path="/gallery"
                   element={
@@ -57,7 +60,9 @@ const App = () => {
                     </ProtectedRoute>
                   }
                 />
-                <Route path="/about" element={<About />} />
+
+                {/* ✅ Catch-all for unmatched routes */}
+                <Route path="*" element={<div>404 Not Found</div>} />
               </Routes>
             </main>
 
