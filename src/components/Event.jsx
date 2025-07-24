@@ -1,7 +1,7 @@
-const Gallery = () => (
+const Event = () => (
   <div className="text-center text-2xl font-bold text-gray-800 dark:text-white">
-    Gallery (Only for Logged-in Users)
+    Upcoming Events
   </div>
 );
 
-export default Gallery;
+export default Event;

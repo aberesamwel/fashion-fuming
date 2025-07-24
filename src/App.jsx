@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import AuthPage from "./components/AuthPage";
 import Home from "./components/home";
+
 import Gallery from "./components/Gallery";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   return (
@@ -14,18 +14,20 @@ const App = () => {
       <AuthProvider>
         <Router>
           <Navbar />
-          <Routes>
-            <Route path="/" element={<AuthPage />} />
-            <Route path="/home" element={<Home />} />
-            <Route
-              path="/gallery"
-              element={
-                <ProtectedRoute>
-                  <Gallery />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
+          <div className="p-6">
+            <Routes>
+              <Route path="/home" element={<Home />} />
+              <Route path="/event" element={<Event />} />
+              <Route
+                path="/gallery"
+                element={
+                  <ProtectedRoute>
+                    <Gallery />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </div>
         </Router>
       </AuthProvider>
     </ThemeProvider>
