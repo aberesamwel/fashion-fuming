@@ -9,7 +9,7 @@ const Gallery = () => {
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-6 text-center">
-        Fashion Gallery
+        
       </h1>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {images.map((img, idx) => (
