@@ -8,6 +8,8 @@ import Home from "./components/home";
 import Dashboard from "./components/Dashboard";
 import About from "./components/About/About";
 import Gallery from "./components/Gallery";
+import Footer from "./components/Footer";
+import Events from "./components/Events";
 
 // Protected route wrapper
 const ProtectedRoute = ({ children }) => {
@@ -26,6 +28,7 @@ function App() {
             <Routes>
               <Route path="/" element={<AuthPage />} />
               <Route path="/home" element={<Home />} />
+              <Route path="/events" element={<Events />} />
               <Route
                 path="/dashboard"
                 element={
@@ -48,6 +51,7 @@ function App() {
         <main className="container mx-auto px-4">
           <Gallery />
           <About />
+           <Footer />
         </main>
       </div>
     </>
