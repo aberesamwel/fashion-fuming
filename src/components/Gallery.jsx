@@ -3,7 +3,6 @@ const Gallery = () => {
     "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=600&q=80",
     "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=600&q=80",
     "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80",
-    "https://images.unsplash.com/photo-1520962910075-96fbc6a31f71?auto=format&fit=crop&w=600&q=80",
   ];
 
   return (
