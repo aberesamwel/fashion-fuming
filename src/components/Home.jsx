@@ -18,7 +18,7 @@ const Home = () => {
       {/* Hero Content */}
       <div className="relative z-10 flex flex-col justify-center items-center text-center min-h-screen px-6">
         <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500">
-          Fashion Fuming
+          FASHION FUMING
         </h1>
         <p className="mt-4 text-xl md:text-2xl text-gray-200">
           Explore the world of fashion trends and style.

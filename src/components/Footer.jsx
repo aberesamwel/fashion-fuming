@@ -8,7 +8,7 @@ const Footer = () => {
       {/* Top Section */}
       <div className="footer-top">
         <div className="brand-section">
-          <h2 className="logo">FÀSĤĪŎN 🪭 FÚSÏÓÑ</h2>
+          <h2 className="logo">FASHION FÚMING</h2>
           <p className="tagline">Celebrating Global Fashion Diversity</p>
           
           <div className="social-links">
@@ -93,7 +93,7 @@ const Footer = () => {
       {/* Bottom Section */}
       <div className="footer-bottom">
         <div className="footer-legal">
-          <p>© 2025 Fashion Fusion. Celebrating cultural fashion worldwide.</p>
+          <p>© 2025 Fashion Fuming. Celebrating cultural fashion worldwide.</p>
           <div className="legal-links">
             <Link to="/privacy">Privacy Policy</Link>
             <Link to="/terms">Terms of Service</Link>

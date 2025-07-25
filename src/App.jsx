@@ -15,12 +15,12 @@ import About from "./components/About/About";
 import Gallery from "./components/Gallery";
 import Events from "./components/Events";
 import Footer from "./components/Footer";
-
 import "./App.css";
 
-// ✅ Protected route wrapper
 const ProtectedRoute = ({ children }) => {
   const { user } = React.useContext(AuthContext);
+  console.log("ProtectedRoute user:", user); 
+
   if (!user || user.guest) return <Navigate to="/" />;
   return children;
 };
@@ -32,12 +32,6 @@ const App = () => {
         <Router>
           <div className="App min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
             <Navbar />
-
-            <header className="bg-white dark:bg-gray-800 shadow p-4 mb-6">
-              <h1 className="text-3xl font-bold text-center text-purple-600 dark:text-purple-300">
-                Fashion Fuming Gallery
-              </h1>
-            </header>
 
             <main className="container mx-auto px-4">
               <Routes>
