@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div className="relative min-h-screen">
-      {/* Background Image */}
+      
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -15,7 +15,7 @@ const Home = () => {
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
       </div>
 
-      {/* Hero Content */}
+      
       <div className="relative z-10 flex flex-col justify-center items-center text-center min-h-screen px-6">
         <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500">
           FASHION FUMING

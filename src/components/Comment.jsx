@@ -10,10 +10,16 @@ const Comment = ({ imageId }) => {
 
   useEffect(() => {
     if (!imageId) return;
+
     fetch(`http://localhost:3001/comments?imageId=${imageId}`)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then(data => setComments(data))
-      .catch(err => console.error('Failed to load comments:', err));
+      .catch(err => {
+        console.error('Failed to load comments:', err);
+      });
   }, [imageId]);
 
   const handleAddComment = () => {
@@ -27,17 +33,20 @@ const Comment = ({ imageId }) => {
 
     fetch(`http://localhost:3001/comments`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newObj)
     })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`Failed to add comment: ${res.status}`);
+        return res.json();
+      })
       .then(added => {
         setComments(prev => [...prev, added]);
         setNewComment('');
       })
-      .catch(err => console.error('Error adding comment:', err));
+      .catch(err => {
+        console.error('Error adding comment:', err);
+      });
   };
 
   const handleReply = (index, replyText) => {
@@ -49,11 +58,14 @@ const Comment = ({ imageId }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ replies: updatedReplies })
     })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`Failed to update reply: ${res.status}`);
+        return res.json();
+      })
       .then(updatedComment => {
-        const newComments = [...comments];
-        newComments[index] = updatedComment;
-        setComments(newComments);
+        const updatedList = [...comments];
+        updatedList[index] = updatedComment;
+        setComments(updatedList);
       })
       .catch(err => console.error('Failed to save reply:', err));
   };
@@ -68,13 +80,15 @@ const Comment = ({ imageId }) => {
         <div className="comment-box">
           <h4 className="comment-title">Comments</h4>
 
+          {comments.length === 0 && <p>No comments yet.</p>}
+
           {comments.map((comment, i) => (
             <div key={comment.id || i} className="comment-item">
               <p className="comment-text">{comment.text}</p>
-              {(comment.replies || []).map((reply, r) => (
-                <p key={r} className="comment-reply">↪ {reply}</p>
+              {(comment.replies || []).map((reply, rIndex) => (
+                <p key={rIndex} className="comment-reply">↪ {reply}</p>
               ))}
-              <ReplyInput onReply={(replyText) => handleReply(i, replyText)} />
+              <ReplyInput onReply={(text) => handleReply(i, text)} />
             </div>
           ))}
 
@@ -102,7 +116,7 @@ const ReplyInput = ({ onReply }) => {
 
   const submitReply = () => {
     if (reply.trim()) {
-      onReply(reply);
+      onReply(reply.trim());
       setReply('');
       setShowInput(false);
     }
