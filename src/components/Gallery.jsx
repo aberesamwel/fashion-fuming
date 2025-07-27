@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
-
+import React, { useState, useEffect } from 'react';
+import { useAuth } from "../contexts/AuthContext"; 
 import Like from './Like';
 import Comment from './Comment';
 import Share from './Share';
@@ -10,7 +9,7 @@ const API_KEY = 'dCGsKHuqgMf7JB0yEolUIJrFRb80ZEL4KoTMdgrilY1yx8K9ZMd2CQ4i';
 const SERVER_URL = 'http://localhost:3001';
 
 const Gallery = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth(); 
   const isLoggedIn = user && !user.guest;
 
   const [images, setImages] = useState([]);
@@ -105,10 +104,10 @@ const Gallery = () => {
           <button
             key={cat}
             onClick={() => setCategory(cat.toLowerCase())}
-            className={`px-4 py-2 rounded border font-semibold ${
+            className={`px-4 py-2 rounded border font-semibold transition ${
               category === cat.toLowerCase()
-                ? 'bg-blue-600 text-white'
-                : 'bg-white text-black border-gray-300'
+                ? 'bg-white text-black border-gray-400'
+                : 'bg-gray-100 text-gray-600 border-gray-300 hover:bg-white hover:text-black'
             }`}
           >
             {cat}
@@ -133,7 +132,7 @@ const Gallery = () => {
             {img.uploaded && (
               <button
                 onClick={() => handleDelete(img.id)}
-                className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded text-xs"
+                className="delete-button"
               >
                 Delete
               </button>
@@ -155,3 +154,4 @@ const Gallery = () => {
 };
 
 export default Gallery;
+

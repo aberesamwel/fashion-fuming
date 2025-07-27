@@ -1,24 +1,23 @@
 .like-button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
   background: none;
   border: none;
   cursor: pointer;
-  color: #888;
-  font-weight: bold;
-  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.heart-icon {
+  font-size: 1.2rem;
+  color: gray;
   transition: color 0.3s ease;
 }
 
-.like-button .heart-icon {
-  font-size: 16px;
-}
-
-.like-button.liked {
-  color: #e63946; /* red when liked */
+.heart-icon.liked {
+  color: red;
 }
 
 .like-count {
-  font-size: 14px;
+  font-size: 1rem;
+  color: #333;
 }

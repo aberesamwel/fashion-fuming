@@ -14,16 +14,16 @@ const Footer = () => {
           <div className="social-links">
             <h3>Connect With Us</h3>
             <div className="social-icons">
-              <a href="https://instagram.com/fashionfusion" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <a href="https://instagram.com/fashionfuming" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href="https://facebook.com/fashionfusion" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <a href="https://facebook.com/fashionfuming" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="https://twitter.com/fashionfusion" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+              <a href="https://twitter.com/fashionfuming" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                 <i className="fab fa-twitter"></i>
               </a>
-              <a href="https://pinterest.com/fashionfusion" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
+              <a href="https://pinterest.com/fashionfuming" target="_blank" rel="noopener noreferrer" aria-label="Pinterest">
                 <i className="fab fa-pinterest-p"></i>
               </a>
             </div>

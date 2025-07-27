@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { useAuth } from "../contexts/AuthContext";
 
 const Navbar = () => {
-  const { login, signup, guestLogin, user, logout } = useContext(AuthContext);
+  const { login, logout, isAuthenticated, user } = useAuth(); 
   const { darkMode, setDarkMode } = useContext(ThemeContext);
 
   const [isLogin, setIsLogin] = useState(true);
@@ -14,7 +14,12 @@ const Navbar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isLogin) login(username);
-    else signup(username);
+    else login(username); // Simplified signup → just use login
+    setShowModal(false);
+  };
+
+  const guestLogin = () => {
+    login("Guest");
     setShowModal(false);
   };
 
@@ -88,7 +93,7 @@ const Navbar = () => {
               {isLogin ? "No account? Sign Up" : "Have an account? Login"}
             </p>
             <button
-              onClick={guestLogin}
+              onClick={guestLogin} // ✅ Now defined
               className="mt-4 w-full bg-gray-500 text-white py-2 rounded-lg hover:bg-gray-600"
             >
               Continue as Guest

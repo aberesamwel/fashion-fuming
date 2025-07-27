@@ -63,7 +63,20 @@ h1, h2 {
   height: 250px;
   object-fit: cover;
 }
-
+/* Move delete button to bottom */
+.image-card .delete-button {
+  position: static !important;
+  margin-top: 0.5rem;
+  display: block;
+  color: rgb(17, 16, 16);
+  padding: 0.1rem 0.1rem;
+  border: 1px solid rgb(2, 2, 2);
+  border-radius: 2px;
+  font-size: 0.85rem;
+  text-align: center;
+  width: 20%;
+  cursor: pointer;
+}
 /* Action Row (Like, Comment, Share) */
 .actions {
   display: flex;

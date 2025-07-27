@@ -3,15 +3,15 @@ import React, { useState } from 'react';
 import './Like.css'; 
 import { FaHeart } from 'react-icons/fa'; 
 
-const Like = ({ imageId }) => {
+const Like = ({ imageId, initialLikes = 0 }) => {
   const [liked, setLiked] = useState(false);
-  const [likesCount, setLikesCount] = useState(0);
+  const [likesCount, setLikesCount] = useState(initialLikes);
 
   const toggleLike = () => {
     if (liked) {
-      setLikesCount((prev) => Math.max(prev - 1, 0));
+      setLikesCount(prev => Math.max(prev - 1, 0));
     } else {
-      setLikesCount((prev) => prev + 1);
+      setLikesCount(prev => prev + 1);
     }
     setLiked(!liked);
   };
@@ -22,7 +22,7 @@ const Like = ({ imageId }) => {
       onClick={toggleLike}
       title={liked ? 'Unlike' : 'Like'}
     >
-      <FaHeart className="heart-icon" />
+      <FaHeart className={`heart-icon ${liked ? 'liked' : ''}`} />
       <span className="like-count">{likesCount}</span>
     </button>
   );
