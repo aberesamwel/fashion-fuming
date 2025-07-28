@@ -11,7 +11,7 @@ const Comment = ({ imageId }) => {
   useEffect(() => {
     if (!imageId) return;
 
-    fetch(`https://fashion-fuming.vercel.app/?imageId=${imageId}`)
+    fetch(`http://localhost:3001/comments?imageId=${imageId}`)
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
@@ -31,7 +31,7 @@ const Comment = ({ imageId }) => {
       replies: []
     };
 
-    fetch(`https://fashion-fuming.vercel.app/`, {
+    fetch(`http://localhost:3001/comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newObj)
@@ -53,7 +53,7 @@ const Comment = ({ imageId }) => {
     const target = comments[index];
     const updatedReplies = [...(target.replies || []), replyText];
 
-    fetch(`https://fashion-fuming.vercel.app/${target.id}`, {
+    fetch(`http://localhost:3001/comments/${target.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ replies: updatedReplies })
