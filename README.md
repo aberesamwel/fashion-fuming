@@ -43,7 +43,7 @@ JSON Server: Install globally with npm install -g json-server
 Steps
 
 Clone the Repository:
-git clone https://github.com/your-username/fashion-fuming.git
+git clone https://github.com/aberesamuel/fashion-fuming.git
 cd fashion-fuming
 
 
@@ -69,7 +69,7 @@ json-server --watch db.json --port 3001
 Start the Development Server:
 npm start
 
-The app will be available at http://localhost:3000.
+The app will be available at https://fashion-fuming-1.onrender.com.
 
 
 Usage
